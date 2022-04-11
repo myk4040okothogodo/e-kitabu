@@ -6,7 +6,7 @@ import { images } from '../../constants';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 
-
+/* this component uses the third party library "@mui" to render a word token card, it also refluxed a isClicked value back to its parent component using a callback*/
 const Word = ({ value, position, setIsClicked }) => {
   
     
