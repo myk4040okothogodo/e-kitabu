@@ -1,0 +1,72 @@
+import React, {useEffect, useRef , useState} from 'react';
+import PageContent from '../PageContent/PageContent';
+import { getBookPages } from '../../services';
+import {CgArrowLeftR, CgArrowRightR} from 'react-icons/cg';
+import './FullpageView.css';
+import { images } from '../../constants';
+
+
+const FullpageView = () => {
+    const [pages, setPages ] = useState([]);
+    const [pageNo, setPageNo] = useState(0);
+    const  scrollRef   =  useRef(0);
+
+    useEffect(()  => {
+        getBookPages().then((result) => {
+            setPages(result);
+        });
+    }, []);
+
+    console.log("pages :",pages);
+    
+    const handleClick = (pageNo,direction) => {
+        
+        if (direction === 'left'  && pageNo > 2){
+            setPageNo(pageNo - 2);
+        }
+        if (direction === 'right' && pageNo < (pages.length - 2)) {
+            setPageNo(pageNo + 2);
+        }
+        scrollRef.current = pageNo;
+    };
+    
+    return (
+    <div>
+    {pages.length > 0 && (
+    <>
+    <div className="app__aboutus app__bg flex__center section_padding " id="about"  ref={scrollRef} >
+      <div className = "app__aboutus-content flex__center">
+          <div className = "app__aboutus-content_about">
+              <h1 className = "headertext__cormorant">{pageNo}</h1>
+              <div className="p__opensans">
+                <PageContent  {...pages[pageNo]} />
+              </div>
+              {pageNo > 0 && (
+              <div className="app__gallery-images_arrows">
+                 <CgArrowLeftR className="gallery__arrow-icon" onClick={() =>  handleClick(pageNo,'left') } />
+               </div>
+               )}
+          </div>
+          <div className="app__aboutus-content_knife flex__center">
+              <img src={images.divider2} alt="about_knife" />
+          </div>
+          <div className="app__aboutus-content_history">
+            <h1 className = "headertext__cormorant">{pageNo + 1}</h1>
+            <div className="p__opensans">
+              <PageContent {...pages[pageNo + 1]} />
+            </div>
+            {pageNo < pages.length && (
+            <div className="app__gallery-images_arrows">
+                 <CgArrowRightR className="gallery__arrow-icon" onClick={() => handleClick(pageNo+1,'right') } />
+            </div>   
+            )}
+         </div>
+         </div>
+      </div>
+    </>
+   )};
+   </div>
+    );
+};
+
+export default FullpageView;

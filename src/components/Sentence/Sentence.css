@@ -1,0 +1,28 @@
+.booK__word {
+    cursor: pointer;
+}
+
+.book__word:hover {
+    color: var(--color-blue);
+
+}
+
+
+.container {
+    display: flex;
+}
+.child {
+
+    animation-duration: 2s;
+    animation-iteration-count: 3;
+    transform-origin: bottom;
+}
+.bounce:hover {
+    animation-name: bounce;
+    animation-timing-function: ease;
+}
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-100px); }
+  100% { transform: translateY(0); }
+}

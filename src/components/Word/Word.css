@@ -1,0 +1,12 @@
+.word__steyling {
+  color: "black";
+}
+
+.word__styling p:hover {
+  color: var(--color-blue);
+}
+
+
+.buttoning:hover {
+  color: var(--color-blue);
+}

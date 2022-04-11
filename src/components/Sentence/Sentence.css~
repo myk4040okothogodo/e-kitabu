@@ -1,0 +1,7 @@
+.booK__word {
+    cursor: pointer;
+}
+
+.book__word:hover {
+    color: var(--color-golden);
+}
