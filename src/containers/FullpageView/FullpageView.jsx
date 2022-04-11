@@ -1,25 +1,25 @@
 import React, {useEffect, useRef , useState} from 'react';
-import PageContent from '../PageContent/PageContent';
-import { getBookPages } from '../../services';
+import PageContent from '../PageContent/PageContent';  /*I also import the PageContent container that i will uses to display the double view*/
+import { getBookPages } from '../../services';     /*Notice i import the getBookPages asynchronous function that defines my query*/
 import {CgArrowLeftR, CgArrowRightR} from 'react-icons/cg';
 import './FullpageView.css';
 import { images } from '../../constants';
 
 
 const FullpageView = () => {
-    const [pages, setPages ] = useState([]);
+    const [pages, setPages ] = useState([]);    /*In the following two lines of code i use Reacts useState Hook to create  pages state to hold rsults from API and pageNo to hold the current page number that our view is renderin*/
     const [pageNo, setPageNo] = useState(0);
     const  scrollRef   =  useRef(0);
   
-    useEffect(()  => {
+    useEffect(()  => {                              /*In the useEffect that i have configured to render only once initially is where i invoke the "getBookPages" async function*/
         getBookPages().then((result) => {
-            setPages(result);
+            setPages(result);                       /* The returned result from queryin the API is what i set to be held by the pages state variable.*/
         });
     }, []);
     
     const handleClick = (pageNo,direction) => {
-        
-        if (direction === 'left'  && pageNo > 2){
+         
+        if (direction === 'left'  && pageNo > 2){     /* handleClick uses two arguments pagenumber and direction clicked  by user to determine, what page to render next*/
             setPageNo(pageNo - 2);
         }
         if (direction === 'left' && (pageNo === 2 || 1 ) ){
@@ -36,14 +36,14 @@ const FullpageView = () => {
     
     return (
     <div>
-    {pages.length > 0 && (
+    {pages.length > 0 && (   /* conditional rendering for only the case where apages received are more than zero i use the imported <PageContent /> container to render individual pages*/
     <>
     <div className="app__aboutus app__bg flex__center section_padding " id="about"  ref={scrollRef} >
       <div className = "app__aboutus-content flex__center">
           <div className = "app__aboutus-content_about">
               <h1 className = "headertext__cormorant">{pageNo}</h1>
               <div className="p__opensans">
-                <PageContent  {...pages[pageNo]} />
+                <PageContent  {...pages[pageNo]} />            
               </div>
               {pageNo > 0 && (
               <div className="app__gallery-images_arrows">
