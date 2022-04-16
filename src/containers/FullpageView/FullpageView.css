@@ -1,5 +1,7 @@
 .app__aboutus {
     position: relative;
+    border: "2px solid black";
+    border-radius: "60px 30px";
 }
 
 .app__aboutus-overlay {

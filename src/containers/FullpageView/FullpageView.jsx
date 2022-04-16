@@ -28,8 +28,11 @@ const FullpageView = () => {
         if (direction === 'right' && pageNo < (pages.length - 2)) {
             setPageNo(pageNo + 2);
         }
-        if (direction === 'right' && (pageNo === pages.length - 2 || pages.length - 1 )){
+        if (direction === 'right' && (pageNo === (pages.length - 2 ) || (pages.length - 1) )){
             setPageNo(pageNo + 1);
+        }
+        if (direction === 'right' && (pageNo === pages.length)){
+            setPageNo(pageNo)
         }
         scrollRef.current = pageNo;
     };
@@ -39,7 +42,7 @@ const FullpageView = () => {
     {pages.length > 0 && (   /* conditional rendering for only the case where apages received are more than zero i use the imported <PageContent /> container to render individual pages*/
     <>
     <div className="app__aboutus app__bg flex__center section_padding " id="about"  ref={scrollRef} >
-      <div className = "app__aboutus-content flex__center">
+      <div className = "app__aboutus-content flex__center" >
           <div className = "app__aboutus-content_about">
               <h1 className = "headertext__cormorant">{pageNo}</h1>
               <div className="p__opensans">
@@ -47,7 +50,7 @@ const FullpageView = () => {
               </div>
               {pageNo > 0 && (
               <div className="app__gallery-images_arrows">
-                 <CgArrowLeftR className="gallery__arrow-icon" onClick={() =>  handleClick(pageNo,'left') } />
+                 <CgArrowLeftR className="gallery__arrow-icon" onClick={() =>  handleClick(pageNo-1,'left') } />
                </div>
                )}
           </div>
@@ -59,9 +62,9 @@ const FullpageView = () => {
             <div className="p__opensans">
               <PageContent {...pages[pageNo + 1]} />
             </div>
-            {pageNo < pages.length && (
+            {(pageNo + 1) < pages.length - 1  && (
             <div className="app__gallery-images_arrows">
-                 <CgArrowRightR className="gallery__arrow-icon" onClick={() => handleClick(pageNo,'right') } />
+                 <CgArrowRightR className="gallery__arrow-icon" onClick={() => handleClick(pageNo+1 ,'right') } />
             </div>   
             )}
          </div>

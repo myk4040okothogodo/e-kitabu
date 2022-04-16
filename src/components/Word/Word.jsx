@@ -11,7 +11,7 @@ const Word = ({ value, position, setIsClicked }) => {
   
     
     return (
-      <Card sx={{ maxWidth: 345 }}>
+      <Card  sx={{ maxWidth: 345, color:"#0074B7"}}>
           <CardMedia
             components = "img"
             height = "140"
